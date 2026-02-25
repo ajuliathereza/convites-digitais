@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="robots" content="noindex,nofollow" />
+  <meta name="theme-color" content="#f2c15f" />
+  <title>Convite do Joaquim</title>
+
+  <!-- Fontes fofinhas -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Fredoka:wght@400;500;700&family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <main class="app">
+
+    <!-- Fundo decorativo -->
+    <div class="bg" aria-hidden="true">
+      <div class="bg__sun"></div>
+      <div class="bg__cloud bg__cloud--1"></div>
+      <div class="bg__cloud bg__cloud--2"></div>
+      <div class="bg__leaf bg__leaf--1"></div>
+      <div class="bg__leaf bg__leaf--2"></div>
+      <div class="bg__leaf bg__leaf--3"></div>
+      <div class="bg__leaf bg__leaf--4"></div>
+      <div class="bg__pawTrail bg__pawTrail--left"></div>
+      <div class="bg__pawTrail bg__pawTrail--right"></div>
+      <div class="bg__ground"></div>
+    </div>
+
+    <!-- Cartão -->
+    <section class="inviteCard" id="inviteCard">
+
+      <!-- Decor lateral (opcional / aparece em telas maiores) -->
+      <div class="sideDecor sideDecor--left" aria-hidden="true">
+        <div class="sideDecor__slot">imagem<br>decorativa</div>
+      </div>
+
+      <div class="sideDecor sideDecor--right" aria-hidden="true">
+        <div class="sideDecor__slot">imagem<br>decorativa</div>
+      </div>
+
+      <!-- TOPO -->
+      <header class="hero">
+        <div class="hero__frame">
+          <video
+            class="hero__video"
+            id="heroVideo"
+            autoplay
+            muted
+            loop
+            playsinline
+            preload="metadata"
+            poster="./assets/img/topo-poster.webp"
+          >
+            <!-- Troque pelo seu vídeo -->
+            <source src="./videos/reileao.mp4" type="video/mp4" />
+          </video>
+
+          <!-- fallback caso o vídeo não carregue -->
+          <div class="hero__fallback" id="heroFallback" aria-hidden="true">
+            🌿 Savana do Joaquim 🦁
+            <small>adicione seu vídeo em /videos/reileao.mp4</small>
+          </div>
+
+          <div class="hero__overlay"></div>
+          <div class="hero__foliage hero__foliage--top" aria-hidden="true"></div>
+        </div>
+
+        <div class="nameBush">
+          <span class="nameBush__text" id="txtNome">Joaquim</span>
+        </div>
+
+        <p class="hero__age"><span id="txtIdade">1</span> aninho</p>
+
+        <p class="hero__lead" id="txtMensagemAbertura">
+          Você acaba de receber um convite especial!
+        </p>
+      </header>
+
+      <!-- ENVELOPE -->
+      <section class="stage stage--envelope" id="stageEnvelope" aria-label="Abrir convite">
+        <button class="envelopeButton" id="btnAbrir" type="button" aria-label="Abrir convite">
+          <div class="envelope" id="envelope">
+  <div class="envelope__shadow"></div>
+  <div class="envelope__back"></div>
+  <div class="envelope__flap"></div>
+
+  <div class="envelope__letter">
+    <span>Toque para abrir</span>
+    <small>✨ convite animado ✨</small>
+  </div>
+
+  <div class="envelope__front"></div>
+
+  <div class="envelope__seal">
+    <img src="./images/simbarosto.png" alt="Selo do convite" />
+  </div>
+</div> <!-- FECHANDO O ENVELOPE AQUI -->
+
+</button>
+      </section>
+
+      <!-- CONTEÚDO -->
+      <section class="stage stage--content hidden" id="stageContent" aria-label="Conteúdo do convite">
+        <p class="hero__lead hero__lead--alt" id="txtMensagemInterna">
+          Todo o reino te espera para comemorar esse dia especial!
+        </p>
+
+        <!-- Data / Hora -->
+        <div class="eventPills">
+          <div class="eventPill">
+            <span class="eventPill__label">Dia</span>
+            <strong class="eventPill__value" id="txtData">15 de Março</strong>
+          </div>
+
+          <div class="eventPill">
+            <span class="eventPill__label">Horário</span>
+            <strong class="eventPill__value" id="txtHora">16:00</strong>
+          </div>
+        </div>
+
+        <!-- Local -->
+        <div class="placeBox">
+          <p class="placeBox__title">📍 Local da aventura</p>
+          <p class="placeBox__name" id="txtLocal">Espaço Festa Alegria</p>
+          <p class="placeBox__addr" id="txtEndereco">Rua Exemplo, 123 — São Paulo/SP</p>
+        </div>
+
+        <!-- Botões -->
+        <div class="actionGrid" aria-label="Botões de ação">
+          <button class="pawBtn" id="btnRsvp" type="button">
+            <span class="pawBtn__circle">
+              <span class="pawBtn__paw" aria-hidden="true"></span>
+              <span class="pawBtn__icon">💬</span>
+            </span>
+            <span class="pawBtn__text">Confirmar<br>presença</span>
+          </button>
+
+          <button class="pawBtn" id="btnMaps" type="button">
+            <span class="pawBtn__circle">
+              <span class="pawBtn__paw" aria-hidden="true"></span>
+              <span class="pawBtn__icon">📍</span>
+            </span>
+            <span class="pawBtn__text">Localização<br>da festa</span>
+          </button>
+
+          <button class="pawBtn" id="btnPresentes" type="button" aria-haspopup="dialog" aria-controls="modalPresentes">
+            <span class="pawBtn__circle">
+              <span class="pawBtn__paw" aria-hidden="true"></span>
+              <span class="pawBtn__icon">🎁</span>
+            </span>
+            <span class="pawBtn__text">Sugestões<br>de presentes</span>
+          </button>
+        </div>
+
+        <!-- Álbum -->
+        <div class="albumCard">
+          <div class="albumCard__head">
+            <span>📸 Álbum da festa</span>
+            <small>memórias do grande dia</small>
+          </div>
+          <button class="albumCard__btn" id="btnAlbum" type="button">Em breve</button>
+        </div>
+
+        <!-- Contagem -->
+        <div class="countPlaceholder" id="countPlaceholder">
+          <span>⏳</span>
+          <strong id="countdownText">Carregando contagem...</strong>
+        </div>
+      </section>
+
+      <!-- Rodapé -->
+      <footer class="footerArt">
+        <div class="footerArt__frame">
+          <!-- Troque por sua imagem -->
+          <img src="./assets/img/rodape.webp" alt="" />
+          <div class="footerArt__fallback">rodapé decorativo</div>
+        </div>
+      </footer>
+
+      <!-- detalhes -->
+      <div class="cardSpark cardSpark--1" aria-hidden="true"></div>
+      <div class="cardSpark cardSpark--2" aria-hidden="true"></div>
+      <div class="cardPaws" aria-hidden="true"></div>
+    </section>
+  </main>
+
+  <!-- Modal presentes -->
+  <div class="modal hidden" id="modalPresentes" role="dialog" aria-modal="true" aria-labelledby="presentesTitle">
+    <div class="modal__backdrop" data-close="true"></div>
+
+    <div class="modal__panel">
+      <div class="modal__leaves" aria-hidden="true"></div>
+
+      <div class="modal__top">
+        <div>
+          <p class="modal__kicker">Baú da savana</p>
+          <h3 class="modal__title" id="presentesTitle">Sugestões de presentes 🎁</h3>
+        </div>
+        <button class="modal__close" type="button" data-close="true" aria-label="Fechar">✕</button>
+      </div>
+
+      <div class="giftList" role="list">
+        <div class="giftItem" role="listitem">
+          <span class="giftItem__icon">👟</span>
+          <div>
+            <p class="giftItem__name">Calçado tamanho 20</p>
+            <p class="giftItem__hint">ou similar</p>
+          </div>
+        </div>
+
+        <div class="giftItem" role="listitem">
+          <span class="giftItem__icon">👕</span>
+          <div>
+            <p class="giftItem__name">Roupinha tamanho 6</p>
+            <p class="giftItem__hint">cores alegres</p>
+          </div>
+        </div>
+
+        <div class="giftItem" role="listitem">
+          <span class="giftItem__icon">🧩</span>
+          <div>
+            <p class="giftItem__name">Brinquedos interativos</p>
+            <p class="giftItem__hint">criativos e educativos</p>
+          </div>
+        </div>
+      </div>
+
+      <p class="modal__desc">
+        Essas são só sugestões 💛 O mais importante é sua presença nesse dia especial!
+      </p>
+
+      <div class="modal__actions">
+        <button class="modal__ok" type="button" data-close="true">Entendi</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="./script.js"></script>
+</body>
+</html>
