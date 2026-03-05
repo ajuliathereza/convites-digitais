@@ -1160,6 +1160,28 @@ button{
   .footerArt__frame{ height: 110px; }
 }
 
+@media (max-width: 420px){
+  /* envelope maior e mais “presente” */
+  .envelope{
+    width: clamp(220px, 78vw, 300px);
+  }
+
+  /* selo proporcional no celular */
+  .envelope__seal{
+    width: clamp(62px, 20vw, 78px);
+    height: clamp(62px, 20vw, 78px);
+    top: 60%; /* levemente mais alto pra não parecer “caindo” */
+  }
+
+  /* “toque para abrir” um pouco menor pra não quebrar linha */
+  .envelopeHint{
+    font-size: .88rem;
+  }
+  .envelopeHint span{
+    font-size: .76rem;
+  }
+}
+
 /* =========================================================
    16) ESTADOS GERAIS
    ========================================================= */
