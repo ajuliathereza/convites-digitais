@@ -1,5 +1,6 @@
 /* =========================================================
    CONVITE DO JOAQUIM - CSS COMPLETO (limpo e organizado)
+   Versão: selo SEM bolacha + hint fora do envelope
    ========================================================= */
 
 /* =========================================================
@@ -389,7 +390,7 @@ button{
 }
 
 /* =========================================================
-   7) ENVELOPE (sem duplicatas + selo acima) ⭐
+   7) ENVELOPE + HINT (texto fora)
    ========================================================= */
 .envelopeButton{
   width:100%;
@@ -397,6 +398,34 @@ button{
   background: transparent;
   padding: 4px 0 10px;
   cursor:pointer;
+
+  display:flex;
+  flex-direction: column;
+  align-items:center;
+  gap: 8px;
+}
+
+/* Texto abaixo do envelope */
+.envelopeHint{
+  margin: 0;
+  text-align:center;
+  font-family: var(--ff-cute);
+  font-weight: 800;
+  font-size: .92rem;
+  color: #5a3d2b;
+  text-shadow: 0 1px 0 rgba(255,255,255,.55);
+  animation: hintPulse 1.6s ease-in-out infinite;
+}
+.envelopeHint span{
+  display:block;
+  margin-top: 2px;
+  font-size: .78rem;
+  font-weight: 700;
+  opacity: .9;
+}
+@keyframes hintPulse{
+  0%,100%{ transform: translateY(0); opacity: .95; }
+  50%{ transform: translateY(-2px); opacity: 1; }
 }
 
 /* Container principal */
@@ -453,7 +482,7 @@ button{
   pointer-events:none;
 }
 
-/* Carta — começa escondida */
+/* Carta — só papel (sem texto) */
 .envelope__letter{
   position:absolute;
   left: 12px;
@@ -463,15 +492,8 @@ button{
   border-radius: 10px;
   background: linear-gradient(180deg, #fffefb 0%, #fffaf1 100%);
   border: 1px solid #ebdfc8;
-  display:grid;
-  place-items:center;
-  text-align:center;
-  color:#7a563d;
-  font-weight: 800;
-  font-family: var(--ff-cute);
   z-index: 4;
 
-  /* fechado */
   opacity: 0;
   transform: translateY(16px) scale(.985);
   transition:
@@ -497,17 +519,6 @@ button{
   background: linear-gradient(180deg, #f7e8c7, #eed7a7);
   border: 1px solid rgba(145,101,51,.15);
   border-top: none;
-}
-.envelope__letter span{
-  display:block;
-  font-size: .86rem;
-  line-height: 1.05;
-}
-.envelope__letter small{
-  display:block;
-  margin-top: 2px;
-  font-size: .72rem;
-  opacity:.85;
 }
 
 /* Bolso (frente) */
@@ -589,31 +600,34 @@ button{
   border-radius: 6px 6px 0 0;
 }
 
-/* ✅ SELO — acima de tudo (inclusive tampa) */
+/* ✅ SELO — só a imagem (sem círculo branco) */
 .envelope__seal{
   position: absolute;
   left: 50%;
   top: 62%;
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
-  background: #fff;
-  display: grid;
-  place-items: center;
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.18);
-  overflow: hidden;
+  width: 72px;
+  height: 72px;
 
-  z-index: 10; /* maior que flap/front */
+  z-index: 10;
   transform: translate(-50%, -50%) translateZ(3px);
 
+  background: transparent;
+  border-radius: 0;
+  box-shadow: none;
+  overflow: visible;
+
   pointer-events: none;
+  display:grid;
+  place-items:center;
 }
 .envelope__seal img{
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  border-radius: 50%;
+  width:100%;
+  height:100%;
+  object-fit: contain;
+  display:block;
+  border-radius: 0;
+  background: transparent;
+  filter: drop-shadow(0 6px 14px rgba(0,0,0,.18));
 }
 
 /* ===== ESTADOS DA ANIMAÇÃO ===== */
@@ -630,7 +644,7 @@ button{
   transition: transform .35s ease, opacity .25s ease;
 }
 
-/* Sombra reage */
+/* sombra reage */
 .envelope.is-flap-open .envelope__shadow{
   transform: scaleX(.94);
   opacity:.13;
@@ -643,6 +657,11 @@ button{
   box-shadow:
     inset 0 -10px 0 rgba(242,193,95,.08),
     0 8px 18px rgba(0,0,0,.12);
+}
+
+/* ✅ Esconde o hint depois que abre (funciona nos navegadores modernos) */
+.envelopeButton:has(.envelope.is-flap-open) .envelopeHint{
+  display:none;
 }
 
 /* =========================================================

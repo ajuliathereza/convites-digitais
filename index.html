@@ -34,14 +34,7 @@
     <!-- Cartão -->
     <section class="inviteCard" id="inviteCard">
 
-      <!-- Decor lateral (opcional / aparece em telas maiores) -->
-      <div class="sideDecor sideDecor--left" aria-hidden="true">
-        <div class="sideDecor__slot">imagem<br>decorativa</div>
-      </div>
-
-      <div class="sideDecor sideDecor--right" aria-hidden="true">
-        <div class="sideDecor__slot">imagem<br>decorativa</div>
-      </div>
+      
 
       <!-- TOPO -->
       <header class="hero">
@@ -85,23 +78,27 @@
       <section class="stage stage--envelope" id="stageEnvelope" aria-label="Abrir convite">
         <button class="envelopeButton" id="btnAbrir" type="button" aria-label="Abrir convite">
           <div class="envelope" id="envelope">
-  <div class="envelope__shadow"></div>
-  <div class="envelope__back"></div>
-  <div class="envelope__flap"></div>
+            <div class="envelope__shadow"></div>
+            <div class="envelope__back"></div>
+            <div class="envelope__flap"></div>
 
-  <div class="envelope__letter">
-    <span>Toque para abrir</span>
-    <small>✨ convite animado ✨</small>
-  </div>
+            <!-- CARTA (agora só “papel” — sem texto) -->
+            <div class="envelope__letter" aria-hidden="true"></div>
 
-  <div class="envelope__front"></div>
+            <div class="envelope__front"></div>
 
-  <div class="envelope__seal">
-    <img src="./images/simbarosto.png" alt="Selo do convite" />
-  </div>
-</div> <!-- FECHANDO O ENVELOPE AQUI -->
+            <!-- SELO (imagem sem “bolacha” branca — o CSS vai cuidar disso) -->
+            <div class="envelope__seal" aria-hidden="true">
+              <img src="./images/simbarosto.png" alt="" />
+            </div>
+          </div>
 
-</button>
+          <!-- ✅ Texto fora do envelope (faz sentido para o usuário) -->
+          <p class="envelopeHint" aria-hidden="true">
+            Toque para abrir!
+            <span> </span>
+          </p>
+        </button>
       </section>
 
       <!-- CONTEÚDO -->
@@ -176,7 +173,6 @@
       <!-- Rodapé -->
       <footer class="footerArt">
         <div class="footerArt__frame">
-          <!-- Troque por sua imagem -->
           <img src="./images/rodape.png" alt="" />
           <div class="footerArt__fallback"></div>
         </div>
