@@ -1,9 +1,9 @@
 /* =========================================================
-   CONVITE DO JOAQUIM - CSS COMPLETO (comentado)
+   CONVITE DO JOAQUIM - CSS COMPLETO (limpo e organizado)
    ========================================================= */
 
 /* =========================================================
-   1) VARIÁVEIS GLOBAIS (cores, fontes, sombras)
+   1) VARIÁVEIS GLOBAIS
    ========================================================= */
 :root{
   --bg-a: #f9e8b8;
@@ -373,7 +373,7 @@ button{
 }
 
 /* =========================================================
-   6) STAGES (etapas: envelope / conteúdo)
+   6) STAGES (envelope / conteúdo)
    ========================================================= */
 .stage{
   padding: 8px 8px 10px;
@@ -389,13 +389,7 @@ button{
 }
 
 /* =========================================================
-   7) ENVELOPE (MELHORADO) ⭐
-   ---------------------------------------------------------
-   Dicas pra editar:
-   - Tamanho do envelope: .envelope (width)
-   - Velocidade da abertura: .envelope__flap (transition)
-   - Quanto a carta sobe: .envelope.is-open .envelope__letter
-   - Papel aparecendo demais: ajuste top/height/transform em .envelope__letter
+   7) ENVELOPE (sem duplicatas + selo acima) ⭐
    ========================================================= */
 .envelopeButton{
   width:100%;
@@ -405,61 +399,7 @@ button{
   cursor:pointer;
 }
 
-
-/* Texto na frente do envelope (aparece enquanto está fechado) */
-.envelope::after{
-  content:none;
-  white-space: pre;
-  position:absolute;
-  left: 50%;
-  top: 62%;
-  transform: translate(-50%, -50%);
-  z-index: 5;
-  text-align:center;
-  font-family: var(--ff-cute);
-  font-weight: 800;
-  font-size: .72rem;
-  line-height: 1.1;
-  color: rgba(255,255,255,.95);
-  text-shadow: 0 1px 0 rgba(0,0,0,.18);
-  pointer-events:none;
-  transition: opacity .2s ease, transform .25s ease;
-}
-
-/* Carta (papel interno) - começa escondida */ 
-.envelope__letter{
-  position:absolute;
-  left: 12px;
-  right: 12px;
-  top: 24px;
-  height: 54%;
-  border-radius: 10px;
-  background: linear-gradient(180deg, #fffefb 0%, #fffaf1 100%);
-  border: 1px solid #ebdfc8;
-  display:grid;
-  place-items:center;
-  text-align:center;
-  color:#7a563d;
-  font-weight: 800;
-  z-index:2;
-  font-family: var(--ff-cute);
-
-  /* começa “guardada” */
-  transform: translateY(18px) scale(.985);
-  opacity: 0;
-
-  transition:
-    transform .72s cubic-bezier(.2,.9,.15,1.15),
-    opacity .18s ease,
-    box-shadow .28s ease;
-  box-shadow:
-    inset 0 -10px 0 rgba(242,193,95,.08),
-    0 2px 0 rgba(0,0,0,.04);
-
-  pointer-events:none;
-}
-
-/* Container principal com perspectiva 3D */
+/* Container principal */
 .envelope{
   position:relative;
   width: min(210px, 66vw);
@@ -471,12 +411,12 @@ button{
   filter: drop-shadow(0 8px 10px rgba(0,0,0,.08));
 }
 
-/* Micro movimento no hover (desktop) */
+/* Micro movimento no hover */
 .envelopeButton:hover .envelope{
   transform: translateY(-2px) rotate(-0.4deg);
 }
 
-/* Sombra embaixo do envelope */
+/* Sombra */
 .envelope__shadow{
   position:absolute;
   left: 9%;
@@ -489,7 +429,7 @@ button{
   transition: transform .65s ease, opacity .4s ease;
 }
 
-/* Parte de trás (base do envelope) */
+/* Base */
 .envelope__back{
   position:absolute;
   inset:0;
@@ -501,9 +441,8 @@ button{
   box-shadow:
     inset 0 1px 0 rgba(255,255,255,.25),
     inset 0 -8px 16px rgba(0,0,0,.08);
+  z-index: 1;
 }
-
-/* Brilhos suaves da base */
 .envelope__back::before{
   content:"";
   position:absolute;
@@ -514,12 +453,12 @@ button{
   pointer-events:none;
 }
 
-/* Carta (papel interno) */
+/* Carta — começa escondida */
 .envelope__letter{
   position:absolute;
   left: 12px;
   right: 12px;
-  top: 22px;                  /* sobe/desce o papel quando FECHADO */
+  top: 22px;
   height: 54%;
   border-radius: 10px;
   background: linear-gradient(180deg, #fffefb 0%, #fffaf1 100%);
@@ -529,19 +468,23 @@ button{
   text-align:center;
   color:#7a563d;
   font-weight: 800;
-  z-index:2;
-  transform: translateY(12px); /* deixa o papel mais “guardado” dentro */
+  font-family: var(--ff-cute);
+  z-index: 4;
+
+  /* fechado */
+  opacity: 0;
+  transform: translateY(16px) scale(.985);
   transition:
     transform .75s cubic-bezier(.2,.9,.15,1.15),
-    box-shadow .3s ease,
-    opacity .25s ease;
+    opacity .20s ease,
+    box-shadow .30s ease;
+
   box-shadow:
     inset 0 -10px 0 rgba(242,193,95,.08),
     0 2px 0 rgba(0,0,0,.04);
-  font-family: var(--ff-cute);
-}
 
-/* Detalhe no topo da carta */
+  pointer-events:none;
+}
 .envelope__letter::before{
   content:"";
   position:absolute;
@@ -555,7 +498,6 @@ button{
   border: 1px solid rgba(145,101,51,.15);
   border-top: none;
 }
-
 .envelope__letter span{
   display:block;
   font-size: .86rem;
@@ -568,20 +510,19 @@ button{
   opacity:.85;
 }
 
-/* Frente do envelope (bolso) */
+/* Bolso (frente) */
 .envelope__front{
   position:absolute;
   inset:auto 0 0 0;
   height: 58%;
-  z-index: 3;
   border-bottom-left-radius:12px;
   border-bottom-right-radius:12px;
   border: 2px solid #3e8b34;
   border-top: none;
   overflow:hidden;
   box-shadow: inset 0 1px 0 rgba(255,255,255,.18);
+  z-index: 5;
 
-  /* Camadas de cor + linhas de dobra */
   background:
     linear-gradient(180deg, #63bf50 0%, #4ca63f 100%),
     linear-gradient(135deg, transparent 49.2%, rgba(0,0,0,.14) 50%, transparent 50.8%),
@@ -590,8 +531,6 @@ button{
   background-position: 0 0, left top, right top;
   background-repeat: no-repeat;
 }
-
-/* Abas internas falsas (dão aparência mais real) */
 .envelope__front::before,
 .envelope__front::after{
   content:"";
@@ -614,20 +553,18 @@ button{
   border-right: 1px solid rgba(255,255,255,.08);
 }
 
-/* Tampa do envelope (abre em 3D) */
+/* Tampa */
 .envelope__flap{
   position:absolute;
   inset:0 0 auto 0;
   height: 62%;
-  z-index: 6;
   transform-origin: top center;
   transform-style: preserve-3d;
   backface-visibility: hidden;
   transition: transform .78s cubic-bezier(.22,.8,.2,1);
   will-change: transform;
+  z-index: 6;
 }
-
-/* Face externa da tampa */
 .envelope__flap::before{
   content:"";
   position:absolute;
@@ -640,8 +577,6 @@ button{
   border-bottom: none;
   box-shadow: inset 0 1px 0 rgba(255,255,255,.22);
 }
-
-/* Face interna da tampa (forro) */
 .envelope__flap::after{
   content:"";
   position:absolute;
@@ -654,35 +589,11 @@ button{
   border-radius: 6px 6px 0 0;
 }
 
-/* Selo */
+/* ✅ SELO — acima de tudo (inclusive tampa) */
 .envelope__seal{
-  position:absolute;
-  left:50%;
-  top: 48%;
-  transform: translate(-50%,-50%);
-  width: 30px;
-  aspect-ratio:1;
-  display:grid;
-  place-items:center;
-  border-radius:50%;
-  background:
-    radial-gradient(circle at 35% 35%, #f9de9a, #e1a23c 68%, #c67f1f);
-  border:2px solid rgba(120,72,24,.45);
-  box-shadow:
-    0 2px 0 rgba(0,0,0,.08),
-    inset 0 1px 0 rgba(255,255,255,.3);
-  z-index: 7;
-  font-size:.9rem;
-  transition:
-    transform .35s ease,
-    opacity .25s ease;
-}
-
-.envelope__seal {
   position: absolute;
   left: 50%;
   top: 62%;
-  transform: translate(-50%, -50%);
   width: 64px;
   height: 64px;
   border-radius: 50%;
@@ -690,22 +601,22 @@ button{
   display: grid;
   place-items: center;
   box-shadow: 0 6px 14px rgba(0, 0, 0, 0.18);
-  z-index: 4;
-  overflow: hidden; /* importante para cortar a imagem em círculo */
-}
+  overflow: hidden;
 
-.envelope__seal img {
+  z-index: 10; /* maior que flap/front */
+  transform: translate(-50%, -50%) translateZ(3px);
+
+  pointer-events: none;
+}
+.envelope__seal img{
   width: 100%;
   height: 100%;
-  object-fit: cover; /* mantém bonito mesmo se a imagem não for quadrada */
+  object-fit: cover;
   display: block;
   border-radius: 50%;
 }
 
-/* ===== NOVA SEQUÊNCIA DE ANIMAÇÃO =====
-   1) .is-flap-open -> abre a tampa
-   2) .is-letter-out -> carta aparece e sobe
-*/
+/* ===== ESTADOS DA ANIMAÇÃO ===== */
 
 /* 1) Tampa abre */
 .envelope.is-flap-open .envelope__flap{
@@ -714,23 +625,18 @@ button{
 
 /* Selo some junto com a abertura */
 .envelope.is-flap-open .envelope__seal{
-  transform: translate(-50%,-50%) scale(.75);
   opacity: 0;
+  transform: translate(-50%, -50%) translateZ(3px) scale(.75);
+  transition: transform .35s ease, opacity .25s ease;
 }
 
-/* texto da frente some quando começa a abrir */
-.envelope.is-flap-open::after{
-  opacity: 0;
-  transform: translate(-50%, -52%);
-}
-
-/* sombra reage */
+/* Sombra reage */
 .envelope.is-flap-open .envelope__shadow{
   transform: scaleX(.94);
   opacity:.13;
 }
 
-/* 2) Carta sai DEPOIS */
+/* 2) Carta sai depois */
 .envelope.is-letter-out .envelope__letter{
   opacity: 1;
   transform: translateY(-18px) scale(1);
@@ -742,8 +648,6 @@ button{
 /* =========================================================
    8) CONTEÚDO DO CONVITE
    ========================================================= */
-
-/* Pílulas de data/hora */
 .eventPills{
   display:grid;
   grid-template-columns: 1fr 1fr;
@@ -809,7 +713,7 @@ button{
 }
 
 /* =========================================================
-   9) BOTÕES DE AÇÃO (patinha)
+   9) BOTÕES DE AÇÃO
    ========================================================= */
 .actionGrid{
   display:grid;
@@ -1240,13 +1144,10 @@ button{
 /* =========================================================
    16) ESTADOS GERAIS
    ========================================================= */
-
-/* Travar scroll quando modal estiver aberto */
 body.modal-open{
   overflow: hidden;
 }
 
-/* Acessibilidade: reduzir animações se usuário preferir */
 @media (prefers-reduced-motion: reduce){
   *{
     animation-duration: .01ms !important;
