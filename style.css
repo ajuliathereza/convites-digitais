@@ -1182,6 +1182,172 @@ button{
   }
 }
 
+
+
+/* =========================================================
+   DECORAÇÕES FOFINHAS (patinhas/folhas/brilhos)
+   Cole no FINAL do style.css
+   ========================================================= */
+
+/* Ajuste fino (controle geral) */
+:root{
+  --deco-paw: rgba(108,65,37,.12);      /* cor das patinhas */
+  --deco-paw-soft: rgba(108,65,37,.08); /* bem fraquinho */
+  --deco-leaf: rgba(79,127,62,.18);     /* folhas */
+}
+
+/* ---------- 1) Patinhas nos cantos do card (sutil) ---------- */
+.inviteCard{
+  position: relative; /* garante pseudo-elements */
+}
+
+/* Top-left */
+.inviteCard::before{
+  content:"";
+  position:absolute;
+  top: 10px;
+  left: 10px;
+  width: 90px;
+  height: 90px;
+  pointer-events:none;
+  opacity:.9;
+  transform: rotate(-12deg);
+  background:
+    radial-gradient(circle at 22% 30%, var(--deco-paw) 0 5px, transparent 6px),
+    radial-gradient(circle at 40% 22%, var(--deco-paw) 0 5px, transparent 6px),
+    radial-gradient(circle at 58% 30%, var(--deco-paw) 0 5px, transparent 6px),
+    radial-gradient(circle at 40% 52%, var(--deco-paw) 0 10px, transparent 11px),
+
+    radial-gradient(circle at 68% 72%, var(--deco-paw-soft) 0 4px, transparent 5px),
+    radial-gradient(circle at 80% 66%, var(--deco-paw-soft) 0 4px, transparent 5px),
+    radial-gradient(circle at 90% 72%, var(--deco-paw-soft) 0 4px, transparent 5px),
+    radial-gradient(circle at 80% 86%, var(--deco-paw-soft) 0 8px, transparent 9px);
+}
+
+/* Top-right (espelhado) */
+.inviteCard::after{
+  content:"";
+  position:absolute;
+  top: 10px;
+  right: 10px;
+  width: 90px;
+  height: 90px;
+  pointer-events:none;
+  opacity:.75;
+  transform: scaleX(-1) rotate(-12deg);
+  background:
+    radial-gradient(circle at 22% 30%, var(--deco-paw) 0 5px, transparent 6px),
+    radial-gradient(circle at 40% 22%, var(--deco-paw) 0 5px, transparent 6px),
+    radial-gradient(circle at 58% 30%, var(--deco-paw) 0 5px, transparent 6px),
+    radial-gradient(circle at 40% 52%, var(--deco-paw) 0 10px, transparent 11px),
+
+    radial-gradient(circle at 68% 72%, var(--deco-paw-soft) 0 4px, transparent 5px),
+    radial-gradient(circle at 80% 66%, var(--deco-paw-soft) 0 4px, transparent 5px),
+    radial-gradient(circle at 90% 72%, var(--deco-paw-soft) 0 4px, transparent 5px),
+    radial-gradient(circle at 80% 86%, var(--deco-paw-soft) 0 8px, transparent 9px);
+}
+
+/* ---------- 2) “Textura” de patinhas no fundo do conteúdo ---------- */
+.stage--content{
+  position: relative;
+}
+
+.stage--content::before{
+  content:"";
+  position:absolute;
+  inset: 6px;
+  pointer-events:none;
+  opacity: .25; /* bem leve */
+  border-radius: 14px;
+  background-image:
+    radial-gradient(circle, var(--deco-paw-soft) 34%, transparent 36%),
+    radial-gradient(circle, var(--deco-paw-soft) 34%, transparent 36%),
+    radial-gradient(circle, var(--deco-paw-soft) 34%, transparent 36%),
+    radial-gradient(circle, var(--deco-paw-soft) 42%, transparent 44%);
+  background-size:
+    7px 7px, 7px 7px, 7px 7px, 13px 13px;
+  background-position:
+    8px 10px, 18px 5px, 28px 10px, 18px 18px;
+  background-repeat: repeat;
+  filter: blur(.2px);
+}
+
+/* ---------- 3) SideDecor: vira sticker bonito (sem texto feio) ---------- */
+/* mantém seu comportamento atual: aparece em telas maiores */
+.sideDecor__slot{
+  position: relative;
+  overflow:hidden;
+  border-radius: 14px;
+  border: 2px dashed rgba(207,195,170,.85);
+  background:
+    radial-gradient(circle at 30% 30%, rgba(255,255,255,.85), rgba(255,255,255,.6) 55%, rgba(255,255,255,.35) 100%),
+    radial-gradient(circle at 20% 10%, var(--deco-leaf) 0 18px, transparent 19px),
+    radial-gradient(circle at 70% 30%, var(--deco-leaf) 0 16px, transparent 17px),
+    radial-gradient(circle at 40% 70%, var(--deco-leaf) 0 20px, transparent 21px);
+  color: transparent; /* esconde o texto “imagem decorativa” */
+}
+
+/* patinha central (bem fofinha) */
+.sideDecor__slot::before{
+  content:"🐾";
+  position:absolute;
+  inset:0;
+  display:grid;
+  place-items:center;
+  font-size: 1.4rem;
+  color: rgba(108,65,37,.55);
+  text-shadow: 0 1px 0 rgba(255,255,255,.65);
+  transform: rotate(-10deg);
+}
+
+/* brilho de sticker */
+.sideDecor__slot::after{
+  content:"";
+  position:absolute;
+  inset:-10px -20px auto auto;
+  width: 60px;
+  height: 60px;
+  transform: rotate(25deg);
+  background: radial-gradient(circle, rgba(255,255,255,.65), transparent 60%);
+  opacity:.55;
+}
+
+/* ---------- 4) Rodapé: detalhe extra sutil ---------- */
+.footerArt__frame::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  opacity:.18;
+  background-image:
+    radial-gradient(circle, rgba(255,255,255,.9) 34%, transparent 36%),
+    radial-gradient(circle, rgba(255,255,255,.9) 34%, transparent 36%),
+    radial-gradient(circle, rgba(255,255,255,.9) 34%, transparent 36%),
+    radial-gradient(circle, rgba(255,255,255,.9) 42%, transparent 44%);
+  background-size:
+    7px 7px, 7px 7px, 7px 7px, 13px 13px;
+  background-position:
+    14px 12px, 24px 7px, 34px 12px, 24px 22px;
+  background-repeat: repeat;
+}
+
+/* ---------- 5) (Opcional) mostrar sideDecor também no mobile ----------
+   Se quiser que o “vazio” do mobile tenha sticker, descomente este bloco.
+*/
+/*
+@media (max-width: 699px){
+  .sideDecor{ display:block; }
+  .sideDecor{
+    top: 102px;
+    width: 46px;
+    opacity: .95;
+    pointer-events:none;
+  }
+}
+*/
+
+
+
 /* =========================================================
    16) ESTADOS GERAIS
    ========================================================= */
