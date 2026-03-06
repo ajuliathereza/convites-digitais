@@ -1351,7 +1351,13 @@ body.modal-open{
 
 
 
-
+/* ===== FIX: não deixar NADA por cima da imagem do rodapé ===== */
+.footerArt__frame::before,
+.footerArt__frame::after{
+  content: none !important;
+  background: none !important;
+  opacity: 0 !important;
+}
 
 
 
