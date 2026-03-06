@@ -1088,6 +1088,143 @@ button{
 }
 .modal__ok:hover{ filter: brightness(1.03); }
 
+
+
+/* Rodapé: decoração só nos cantos (não cobre a imagem) */
+.footerArt__frame{
+  position: relative;
+  overflow: hidden;
+}
+
+/* garante que a imagem fique sempre “por cima” */
+.footerArt__frame img{
+  position: relative;
+  z-index: 2;
+}
+
+/* cantinhos com patinhas bem suaves */
+.footerArt__frame::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index: 1;
+  pointer-events:none;
+  opacity: .20; /* ajuste: 0.12 a 0.25 */
+
+  background:
+    /* canto esquerdo */
+    radial-gradient(circle at 12px 16px, rgba(255,255,255,.9) 0 3px, transparent 4px),
+    radial-gradient(circle at 22px 12px, rgba(255,255,255,.9) 0 3px, transparent 4px),
+    radial-gradient(circle at 32px 16px, rgba(255,255,255,.9) 0 3px, transparent 4px),
+    radial-gradient(circle at 22px 28px, rgba(255,255,255,.9) 0 6px, transparent 7px),
+
+    /* canto direito */
+    radial-gradient(circle at calc(100% - 12px) 16px, rgba(255,255,255,.9) 0 3px, transparent 4px),
+    radial-gradient(circle at calc(100% - 22px) 12px, rgba(255,255,255,.9) 0 3px, transparent 4px),
+    radial-gradient(circle at calc(100% - 32px) 16px, rgba(255,255,255,.9) 0 3px, transparent 4px),
+    radial-gradient(circle at calc(100% - 22px) 28px, rgba(255,255,255,.9) 0 6px, transparent 7px),
+
+    /* canto inferior esquerdo */
+    radial-gradient(circle at 14px calc(100% - 18px), rgba(255,255,255,.9) 0 3px, transparent 4px),
+    radial-gradient(circle at 24px calc(100% - 22px), rgba(255,255,255,.9) 0 3px, transparent 4px),
+    radial-gradient(circle at 34px calc(100% - 18px), rgba(255,255,255,.9) 0 3px, transparent 4px),
+    radial-gradient(circle at 24px calc(100% - 6px), rgba(255,255,255,.9) 0 6px, transparent 7px),
+
+    /* canto inferior direito */
+    radial-gradient(circle at calc(100% - 14px) calc(100% - 18px), rgba(255,255,255,.9) 0 3px, transparent 4px),
+    radial-gradient(circle at calc(100% - 24px) calc(100% - 22px), rgba(255,255,255,.9) 0 3px, transparent 4px),
+    radial-gradient(circle at calc(100% - 34px) calc(100% - 18px), rgba(255,255,255,.9) 0 3px, transparent 4px),
+    radial-gradient(circle at calc(100% - 24px) calc(100% - 6px), rgba(255,255,255,.9) 0 6px, transparent 7px);
+}
+
+
+/* =========================================================
+   DECORAÇÃO FOFA (SEM COBRIR RODAPÉ) ✅
+   Cole no FINAL do style.css
+   ========================================================= */
+
+/* cria uma camada controlada para pseudo-elementos */
+.inviteCard{
+  position: relative;
+  isolation: isolate;
+}
+
+/* garante que conteúdo fique por cima da decoração */
+.hero, .stage, .footerArt{
+  position: relative;
+  z-index: 2;
+}
+
+/* garante que seus brilhos/patinhas existentes fiquem acima também */
+.cardSpark, .cardPaws, .sideDecor{
+  position: absolute;
+  z-index: 3;
+}
+
+/* ---------- Patinhas nos cantos do card (visível, mas delicado) ---------- */
+.inviteCard::before,
+.inviteCard::after{
+  content:"";
+  position:absolute;
+  width: 110px;
+  height: 110px;
+  pointer-events:none;
+  z-index: 1;
+  opacity: .22; /* aumenta pra 0.30 se quiser mais forte */
+  filter: blur(.1px);
+  background:
+    radial-gradient(circle at 26% 32%, rgba(108,65,37,.9) 0 5px, transparent 6px),
+    radial-gradient(circle at 44% 24%, rgba(108,65,37,.9) 0 5px, transparent 6px),
+    radial-gradient(circle at 62% 32%, rgba(108,65,37,.9) 0 5px, transparent 6px),
+    radial-gradient(circle at 44% 56%, rgba(108,65,37,.9) 0 10px, transparent 11px);
+}
+
+/* canto superior esquerdo */
+.inviteCard::before{
+  top: 10px;
+  left: 10px;
+  transform: rotate(-14deg);
+}
+
+/* canto inferior direito */
+.inviteCard::after{
+  bottom: 12px;
+  right: 12px;
+  transform: rotate(12deg);
+  opacity: .18;
+}
+
+/* ---------- Extra: patinhas bem leves só na área do envelope (não no rodapé) ---------- */
+.stage--envelope{
+  position: relative;
+}
+
+.stage--envelope::before{
+  content:"";
+  position:absolute;
+  inset: 6px 10px 6px 10px;
+  border-radius: 16px;
+  pointer-events:none;
+  z-index: 1;
+  opacity: .10; /* bem sutil */
+  background:
+    radial-gradient(circle at 12% 24%, rgba(108,65,37,.8) 0 3px, transparent 4px),
+    radial-gradient(circle at 16% 18%, rgba(108,65,37,.8) 0 3px, transparent 4px),
+    radial-gradient(circle at 20% 24%, rgba(108,65,37,.8) 0 3px, transparent 4px),
+    radial-gradient(circle at 16% 32%, rgba(108,65,37,.8) 0 6px, transparent 7px),
+
+    radial-gradient(circle at 88% 70%, rgba(108,65,37,.7) 0 3px, transparent 4px),
+    radial-gradient(circle at 84% 64%, rgba(108,65,37,.7) 0 3px, transparent 4px),
+    radial-gradient(circle at 80% 70%, rgba(108,65,37,.7) 0 3px, transparent 4px),
+    radial-gradient(circle at 84% 78%, rgba(108,65,37,.7) 0 6px, transparent 7px);
+}
+
+/* garante que envelope/hint fiquem acima desse fundo */
+.envelopeButton{
+  position: relative;
+  z-index: 2;
+}
+
 /* =========================================================
    14) ACESSIBILIDADE (focus)
    ========================================================= */
@@ -1203,3 +1340,25 @@ body.modal-open{
     scroll-behavior: auto !important;
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
