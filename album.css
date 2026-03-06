@@ -1,11 +1,6 @@
-/* =========================================================
-   CONVITE DO JOAQUIM - CSS COMPLETO (limpo e organizado)
-   Versão: selo SEM bolacha + hint fora do envelope
-   ========================================================= */
 
-/* =========================================================
-   1) VARIÁVEIS GLOBAIS
-   ========================================================= */
+
+
 :root{
   --bg-a: #f9e8b8;
   --bg-b: #e7cf8b;
@@ -1089,349 +1084,245 @@ button{
 .modal__ok:hover{ filter: brightness(1.03); }
 
 
+/* =========================================================
+   ALBUM PAGE (cole no final do style.css)
+   ========================================================= */
 
-/* Rodapé: decoração só nos cantos (não cobre a imagem) */
-.footerArt__frame{
-  position: relative;
-  overflow: hidden;
+.albumPage .inviteCard.albumWrap{
+  padding: 10px;
 }
 
-/* garante que a imagem fique sempre “por cima” */
-.footerArt__frame img{
-  position: relative;
-  z-index: 2;
+/* Cabeçalho do álbum */
+.albumHero{
+  padding: 8px 8px 6px;
 }
 
-/* cantinhos com patinhas bem suaves */
-.footerArt__frame::before{
-  content:"";
+.albumHero__top{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:10px;
+}
+
+.albumHero__kicker{
+  margin:0;
+  font-family: var(--ff-cute);
+  font-weight: 800;
+  color:#6c4125;
+  font-size: .82rem;
+}
+
+.albumHero__title{
+  margin: 2px 0 0;
+  font-family: var(--ff-title);
+  font-weight: 900;
+  color:#4f3628;
+  font-size: 1.35rem;
+  line-height: 1;
+}
+
+.albumHero__sub{
+  margin: 6px 0 0;
+  font-family: var(--ff-cute);
+  font-weight: 700;
+  color:#7a5b47;
+  font-size: .86rem;
+}
+
+.albumBack{
+  flex: 0 0 auto;
+  text-decoration:none;
+  border-radius: 12px;
+  padding: 10px 12px;
+  border: 1px solid #eadfc8;
+  background: #fff;
+  color:#4f3628;
+  font-family: var(--ff-cute);
+  font-weight: 800;
+}
+
+.albumNotice{
+  margin-top: 10px;
+  border-radius: 14px;
+  border: 2px dashed #e5d7be;
+  background: linear-gradient(180deg, #fffaf0, #fff7ea);
+  padding: 10px 10px;
+  color:#6c4125;
+  font-family: var(--ff-cute);
+}
+.albumNotice strong{
+  display:block;
+  font-size: .95rem;
+}
+.albumNotice span{
+  display:block;
+  margin-top: 2px;
+  font-size: .82rem;
+  color:#7a5b47;
+  font-weight: 700;
+}
+
+/* Ações */
+.albumActions{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  padding: 8px 8px 6px;
+}
+
+.albumActionBtn{
+  border:none;
+  border-radius: 12px;
+  padding: 10px 10px;
+  background: linear-gradient(180deg, #8cad45, #6f8b2f);
+  border: 2px solid #647c29;
+  color:#fff;
+  font-family: var(--ff-cute);
+  font-weight: 900;
+  cursor:pointer;
+  box-shadow: 0 3px 0 rgba(0,0,0,.08);
+}
+.albumActionBtn:disabled{
+  opacity:.72;
+  cursor:not-allowed;
+}
+.albumActionBtn--ghost{
+  background: #fff;
+  color:#4f3628;
+  border: 2px solid #eadfc8;
+}
+
+/* Seção */
+.albumSection{
+  padding: 8px;
+}
+
+.albumSection__head{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-bottom: 8px;
+}
+
+.albumSection__title{
+  margin:0;
+  font-family: var(--ff-title);
+  font-weight: 900;
+  color:#4f3628;
+  font-size: 1.02rem;
+}
+.albumSection__hint{
+  margin:0;
+  font-family: var(--ff-cute);
+  font-weight: 700;
+  color:#7a5b47;
+  font-size: .78rem;
+}
+
+/* Grade de fotos */
+.albumGrid{
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.albumThumb{
+  width:100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 14px;
+  border: 2px solid #dfe9c8;
+  background: #f6f1e6;
+  overflow:hidden;
+  cursor:pointer;
+  position: relative;
+  box-shadow: 0 3px 0 rgba(0,0,0,.06);
+}
+
+.albumThumb img{
+  width:100%;
+  height:100%;
+  object-fit: cover;
+  display:block;
+}
+
+/* Placeholder (prévia) */
+.albumThumb.is-placeholder{
+  cursor:not-allowed;
+  border: 2px dashed #d8cdb7;
+  background:
+    linear-gradient(110deg, rgba(255,255,255,.25) 8%, rgba(255,255,255,.55) 18%, rgba(255,255,255,.25) 33%),
+    linear-gradient(180deg, #fffaf0, #fff7ea);
+  background-size: 220% 100%, 100% 100%;
+  animation: shimmer 1.4s ease-in-out infinite;
+}
+@keyframes shimmer{
+  0%{ background-position: 120% 0, 0 0; }
+  100%{ background-position: -40% 0, 0 0; }
+}
+
+/* Rodapé */
+.albumFooter{
+  padding: 8px 10px 10px;
+}
+.albumFooter__text{
+  margin: 0;
+  font-family: var(--ff-cute);
+  font-weight: 700;
+  color:#7a5b47;
+  font-size: .8rem;
+  line-height: 1.25;
+  text-align:center;
+}
+
+/* Modal foto */
+.photoModal{
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display:grid;
+  place-items:center;
+  padding: 12px;
+}
+.photoModal__backdrop{
   position:absolute;
   inset:0;
-  z-index: 1;
-  pointer-events:none;
-  opacity: 1.20; /* ajuste: 0.12 a 0.25 */
-
-  background:
-    /* canto esquerdo */
-    radial-gradient(circle at 12px 16px, rgba(19, 19, 19, 0.9) 0 3px, transparent 4px),
-    radial-gradient(circle at 22px 12px, rgba(26, 25, 25, 0.9) 0 3px, transparent 4px),
-    radial-gradient(circle at 32px 16px, rgba(20, 19, 19, 0.9) 0 3px, transparent 4px),
-    radial-gradient(circle at 22px 28px, rgba(9, 9, 9, 0.9) 0 6px, transparent 7px),
-
-    /* canto direito */
-    radial-gradient(circle at calc(100% - 12px) 16px, rgba(25, 24, 24, 0.9) 0 3px, transparent 4px),
-    radial-gradient(circle at calc(100% - 22px) 12px, rgba(27, 26, 26, 0.9) 0 3px, transparent 4px),
-    radial-gradient(circle at calc(100% - 32px) 16px, rgba(16, 16, 16, 0.9) 0 3px, transparent 4px),
-    radial-gradient(circle at calc(100% - 22px) 28px, rgba(13, 13, 13, 0.9) 0 6px, transparent 7px),
-
-    /* canto inferior esquerdo */
-    radial-gradient(circle at 14px calc(100% - 18px), rgba(255,255,255,.9) 0 3px, transparent 4px),
-    radial-gradient(circle at 24px calc(100% - 22px), rgba(255,255,255,.9) 0 3px, transparent 4px),
-    radial-gradient(circle at 34px calc(100% - 18px), rgba(255,255,255,.9) 0 3px, transparent 4px),
-    radial-gradient(circle at 24px calc(100% - 6px), rgba(255,255,255,.9) 0 6px, transparent 7px),
-
-    /* canto inferior direito */
-    radial-gradient(circle at calc(100% - 14px) calc(100% - 18px), rgba(255,255,255,.9) 0 3px, transparent 4px),
-    radial-gradient(circle at calc(100% - 24px) calc(100% - 22px), rgba(255,255,255,.9) 0 3px, transparent 4px),
-    radial-gradient(circle at calc(100% - 34px) calc(100% - 18px), rgba(255,255,255,.9) 0 3px, transparent 4px),
-    radial-gradient(circle at calc(100% - 24px) calc(100% - 6px), rgba(255,255,255,.9) 0 6px, transparent 7px);
+  background: rgba(0,0,0,.55);
+  backdrop-filter: blur(4px);
 }
-
-
-/* =========================================================
-   DECORAÇÃO FOFA (SEM COBRIR RODAPÉ) ✅
-   Cole no FINAL do style.css
-   ========================================================= */
-
-/* cria uma camada controlada para pseudo-elementos */
-.inviteCard{
-  position: relative;
-  isolation: isolate;
+.photoModal__panel{
+  position:relative;
+  width:min(100%, 520px);
+  border-radius: 18px;
+  background:#fffdf8;
+  border: 2px solid #eadfc8;
+  box-shadow: 0 16px 30px rgba(0,0,0,.22);
+  padding: 10px;
+  overflow:hidden;
 }
-
-/* garante que conteúdo fique por cima da decoração */
-.hero, .stage, .footerArt{
-  position: relative;
-  z-index: 2;
-}
-
-/* garante que seus brilhos/patinhas existentes fiquem acima também */
-.cardSpark, .cardPaws, .sideDecor{
-  position: absolute;
-  z-index: 3;
-}
-
-/* ---------- Patinhas nos cantos do card (visível, mas delicado) ---------- */
-.inviteCard::before,
-.inviteCard::after{
-  content:"";
+.photoModal__close{
   position:absolute;
-  width: 110px;
-  height: 110px;
-  pointer-events:none;
-  z-index: 1;
-  opacity: 1.22; /* aumenta pra 0.30 se quiser mais forte */
-  filter: blur(.1px);
-  background:
-    radial-gradient(circle at 26% 32%, rgba(108,65,37,.9) 0 5px, transparent 6px),
-    radial-gradient(circle at 44% 24%, rgba(108,65,37,.9) 0 5px, transparent 6px),
-    radial-gradient(circle at 62% 32%, rgba(108,65,37,.9) 0 5px, transparent 6px),
-    radial-gradient(circle at 44% 56%, rgba(108,65,37,.9) 0 10px, transparent 11px);
-}
-
-/* canto superior esquerdo */
-.inviteCard::before{
   top: 10px;
-  left: 10px;
-  transform: rotate(-14deg);
+  right: 10px;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  border:1px solid #eadfc8;
+  background:#fff;
+  color:#4f3628;
+  cursor:pointer;
+  font-size: 1rem;
+}
+.photoModal__img{
+  width:100%;
+  height:auto;
+  display:block;
+  border-radius: 14px;
 }
 
-/* canto inferior direito */
-.inviteCard::after{
-  bottom: 12px;
-  right: 12px;
-  transform: rotate(12deg);
-  opacity: .18;
-}
-
-/* ---------- Extra: patinhas bem leves só na área do envelope (não no rodapé) ---------- */
-.stage--envelope{
-  position: relative;
-}
-
-.stage--envelope::before{
-  content:"";
-  position:absolute;
-  inset: 6px 10px 6px 10px;
-  border-radius: 16px;
-  pointer-events:none;
-  z-index: 1;
-  opacity: 1.10; /* bem sutil */
-  background:
-    radial-gradient(circle at 12% 24%, rgba(108,65,37,.8) 0 3px, transparent 4px),
-    radial-gradient(circle at 16% 18%, rgba(108,65,37,.8) 0 3px, transparent 4px),
-    radial-gradient(circle at 20% 24%, rgba(108,65,37,.8) 0 3px, transparent 4px),
-    radial-gradient(circle at 16% 32%, rgba(108,65,37,.8) 0 6px, transparent 7px),
-
-    radial-gradient(circle at 88% 70%, rgba(108,65,37,.7) 0 3px, transparent 4px),
-    radial-gradient(circle at 84% 64%, rgba(108,65,37,.7) 0 3px, transparent 4px),
-    radial-gradient(circle at 80% 70%, rgba(108,65,37,.7) 0 3px, transparent 4px),
-    radial-gradient(circle at 84% 78%, rgba(108,65,37,.7) 0 6px, transparent 7px);
-}
-
-/* garante que envelope/hint fiquem acima desse fundo */
-.envelopeButton{
-  position: relative;
-  z-index: 2;
-}
-
-
-
-
-/* =========================================================
-   14) ACESSIBILIDADE (focus)
-   ========================================================= */
-.envelopeButton:focus-visible,
-.pawBtn:focus-visible,
-.albumCard__btn:focus-visible,
-.modal__close:focus-visible,
-.modal__ok:focus-visible{
-  outline: 3px solid rgba(240,180,76,.45);
-  outline-offset: 3px;
-  border-radius: 12px;
-}
-
-/* =========================================================
-   15) RESPONSIVO
-   ========================================================= */
+/* Responsivo */
 @media (max-width: 390px){
-  .inviteCard{
-    border-radius: 22px;
-    padding: 7px;
-  }
-
-  .nameBush{
-    margin-top: -10px;
-    padding: 6px 12px;
-  }
-
-  .nameBush__text{ font-size: 1.25rem; }
-  .hero__age{ font-size: 1.02rem; }
-  .hero__lead{ font-size: .86rem; }
-
-  .eventPills{
-    grid-template-columns: 1fr;
-    gap: 6px;
-  }
-
-  .actionGrid{
-    grid-template-columns: repeat(2, 1fr);
-    gap: 8px 6px;
-  }
-
-  .actionGrid .pawBtn:nth-child(3){
-    grid-column: 1 / -1;
-  }
-
-  .pawBtn__text{ font-size: .72rem; }
-  .footerArt__frame{ height: 82px; }
+  .albumGrid{ gap: 6px; }
+  .albumActions{ grid-template-columns: 1fr; }
 }
-
-@media (max-width: 320px){
-  .hero__lead{ font-size: .82rem; }
-  .placeBox__addr{ font-size: .7rem; }
-  .giftItem__name{ font-size: .82rem; }
-  .giftItem__hint{ font-size: .68rem; }
-}
-
-@media (min-width: 420px){
-  .inviteCard{ padding: 10px; }
-  .footerArt__frame{ height: 96px; }
-  .pawBtn__text{ font-size:.76rem; }
-}
-
-@media (min-width: 700px){
-  .app{ padding: 20px; }
-  .sideDecor{ display:block; }
-  .hero__frame{ min-height: 190px; }
-  .actionGrid{ gap: 10px; }
-  .pawBtn__circle{ width: 82px; }
-  .pawBtn__text{ font-size:.8rem; }
-  .footerArt__frame{ height: 110px; }
-}
-
-@media (max-width: 420px){
-  /* envelope maior e mais “presente” */
-  .envelope{
-    width: clamp(220px, 78vw, 300px);
-  }
-
-  /* selo proporcional no celular */
-  .envelope__seal{
-    width: clamp(62px, 20vw, 78px);
-    height: clamp(62px, 20vw, 78px);
-    top: 60%; /* levemente mais alto pra não parecer “caindo” */
-  }
-
-  /* “toque para abrir” um pouco menor pra não quebrar linha */
-  .envelopeHint{
-    font-size: .88rem;
-  }
-  .envelopeHint span{
-    font-size: .76rem;
-  }
-}
-
-
-
-
-
-
-
-/* =========================================================
-   16) ESTADOS GERAIS
-   ========================================================= */
-body.modal-open{
-  overflow: hidden;
-}
-
-@media (prefers-reduced-motion: reduce){
-  *{
-    animation-duration: .01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: .01ms !important;
-    scroll-behavior: auto !important;
-  }
-}
-
-
-
-
-
-
-
-
-
-
-
-/* ===== FIX: não deixar NADA por cima da imagem do rodapé ===== */
-.footerArt__frame::before,
-.footerArt__frame::after{
-  content: none !important;
-  background: none !important;
-  opacity: 0 !important;
-}
-
-
-/* ===== ENFEITE: CAPIM nas laterais (savana) ===== */
-.inviteCard{
-  position: relative;
-  overflow: hidden;
-}
-
-/* capim esquerdo */
-.footerArt{
-  position: relative;
-  z-index: 2; /* garante que não encoste no rodapé */
-}
-
-.stage--content{
-  position: relative;
-  z-index: 2;
-}
-
-/* camada de capim (não cobre rodapé porque fica acima dele) */
-.stage--content::before{
-  content:"";
-  position:absolute;
-  left:-26px;
-  right:-26px;
-  bottom:-6px;
-  height: 44px;
-  pointer-events:none;
-  z-index: 0;
-
-  background:
-    linear-gradient(180deg, rgba(79,127,62,0), rgba(79,127,62,.32)),
-    repeating-linear-gradient(
-      90deg,
-      rgba(63,108,52,.55) 0 6px,
-      rgba(63,108,52,0) 6px 12px
-    );
-
-  clip-path: polygon(
-    0 100%,
-    3% 62%, 6% 100%,
-    10% 52%, 13% 100%,
-    18% 64%, 21% 100%,
-    26% 48%, 29% 100%,
-    35% 66%, 38% 100%,
-    44% 54%, 47% 100%,
-    53% 68%, 56% 100%,
-    62% 50%, 65% 100%,
-    71% 66%, 74% 100%,
-    80% 52%, 83% 100%,
-    90% 64%, 93% 100%,
-    100% 100%
-  );
-
-  opacity: .65; /* bem visível */
-}
-
-/* garante que o conteúdo do stage fique acima do capim */
-.stage--content > *{
-  position: relative;
-  z-index: 1;
-}
-
-
-
-
-
-
-
-
-
-
-
-

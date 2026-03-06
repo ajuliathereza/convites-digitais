@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="robots" content="noindex,nofollow" />
+  <meta name="theme-color" content="#f2c15f" />
+  <title>Álbum — Joaquim</title>
+
+  <!-- Fontes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Fredoka:wght@400;500;700&family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Reutiliza o mesmo CSS do convite -->
+  <link rel="stylesheet" href="./album.css" />
+</head>
+<body class="albumPage">
+  <main class="app">
+
+    <!-- Fundo decorativo (mesmo do convite) -->
+    <div class="bg" aria-hidden="true">
+      <div class="bg__sun"></div>
+      <div class="bg__cloud bg__cloud--1"></div>
+      <div class="bg__cloud bg__cloud--2"></div>
+      <div class="bg__leaf bg__leaf--1"></div>
+      <div class="bg__leaf bg__leaf--2"></div>
+      <div class="bg__leaf bg__leaf--3"></div>
+      <div class="bg__leaf bg__leaf--4"></div>
+      <div class="bg__pawTrail bg__pawTrail--left"></div>
+      <div class="bg__pawTrail bg__pawTrail--right"></div>
+      <div class="bg__ground"></div>
+    </div>
+
+    <section class="inviteCard albumWrap" aria-label="Álbum da festa">
+
+      <!-- Cabeçalho do álbum -->
+      <header class="albumHero">
+        <div class="albumHero__top">
+          <div>
+            <p class="albumHero__kicker"> Álbum da festa</p>
+            <h1 class="albumHero__title">Joaquim</h1>
+            <p class="albumHero__sub">Memórias do grande dia 💛</p>
+          </div>
+
+          <a class="albumBack" href="./index.html" aria-label="Voltar ao convite">
+            ← Voltar
+          </a>
+        </div>
+
+        <div class="albumNotice" role="status" aria-live="polite">
+          <strong>Em breve!</strong>
+          <span>Depois da festa, as fotos aparecerão aqui automaticamente.</span>
+        </div>
+      </header>
+
+      <!-- Ações -->
+      <section class="albumActions" aria-label="Ações do álbum">
+        <button class="albumActionBtn" type="button" id="btnBaixarTudo" disabled aria-disabled="true">
+          ⬇️ Baixar tudo (em breve)
+        </button>
+
+        <button class="albumActionBtn albumActionBtn--ghost" type="button" id="btnCompartilhar">
+          🔗 Compartilhar álbum
+        </button>
+      </section>
+
+      <!-- Grid do álbum (prévia com placeholders) -->
+      <section class="albumSection" aria-label="Fotos do álbum">
+        <div class="albumSection__head">
+          <h2 class="albumSection__title">Galeria</h2>
+          <p class="albumSection__hint">Prévia do layout — as miniaturas aparecerão aqui.</p>
+        </div>
+
+        <div class="albumGrid" id="albumGrid" aria-label="Grade de fotos">
+          <!-- placeholders (sem imagens ainda) -->
+          <button class="albumThumb is-placeholder" type="button" aria-label="Foto em breve" disabled></button>
+          <button class="albumThumb is-placeholder" type="button" aria-label="Foto em breve" disabled></button>
+          <button class="albumThumb is-placeholder" type="button" aria-label="Foto em breve" disabled></button>
+          <button class="albumThumb is-placeholder" type="button" aria-label="Foto em breve" disabled></button>
+          <button class="albumThumb is-placeholder" type="button" aria-label="Foto em breve" disabled></button>
+          <button class="albumThumb is-placeholder" type="button" aria-label="Foto em breve" disabled></button>
+          <button class="albumThumb is-placeholder" type="button" aria-label="Foto em breve" disabled></button>
+          <button class="albumThumb is-placeholder" type="button" aria-label="Foto em breve" disabled></button>
+          <button class="albumThumb is-placeholder" type="button" aria-label="Foto em breve" disabled></button>
+        </div>
+      </section>
+
+      <!-- Rodapé do álbum -->
+      <footer class="albumFooter">
+        <p class="albumFooter__text">
+          Muito obrigado pela presença de todos!
+        </p>
+      </footer>
+    </section>
+  </main>
+
+  <!-- Modal (prévia para quando tiver fotos) -->
+  <div class="photoModal hidden" id="photoModal" role="dialog" aria-modal="true" aria-label="Visualizar foto">
+    <div class="photoModal__backdrop" data-close="true"></div>
+    <div class="photoModal__panel">
+      <button class="photoModal__close" type="button" data-close="true" aria-label="Fechar">✕</button>
+      <img class="photoModal__img" id="photoModalImg" alt="Foto do álbum" />
+    </div>
+  </div>
+
+  <script>
+    // Compartilhar link do álbum
+    document.getElementById("btnCompartilhar")?.addEventListener("click", async () => {
+      const url = window.location.href;
+
+      // Web Share (celular)
+      if (navigator.share) {
+        try {
+          await navigator.share({ title: "Álbum do Joaquim", url });
+          return;
+        } catch {}
+      }
+
+      // Fallback: copiar link
+      try {
+        await navigator.clipboard.writeText(url);
+        alert("Link do álbum copiado! 💛");
+      } catch {
+        prompt("Copie o link do álbum:", url);
+      }
+    });
+
+    // Modal (já pronto para quando tiver fotos reais)
+    const modal = document.getElementById("photoModal");
+    const modalImg = document.getElementById("photoModalImg");
+
+    function abrirModal(src) {
+      if (!modal || !modalImg) return;
+      modalImg.src = src;
+      modal.classList.remove("hidden");
+      document.body.classList.add("modal-open");
+    }
+
+    function fecharModal() {
+      if (!modal) return;
+      modal.classList.add("hidden");
+      document.body.classList.remove("modal-open");
+      if (modalImg) modalImg.src = "";
+    }
+
+    modal?.addEventListener("click", (e) => {
+      const t = e.target;
+      if (!(t instanceof HTMLElement)) return;
+      if (t.dataset.close === "true") fecharModal();
+    });
+
+    document.addEventListener("keydown", (e) => {
+      const aberto = modal && !modal.classList.contains("hidden");
+      if (e.key === "Escape" && aberto) fecharModal();
+    });
+
+    // Quando você tiver fotos:
+    // 1) coloque arquivos em /album/ (ex: ./album/01.jpg)
+    // 2) substitua os placeholders gerando thumbs reais via JS (posso montar isso pra você)
+  </script>
+</body>
+</html>
+
+
+
+

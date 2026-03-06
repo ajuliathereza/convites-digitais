@@ -296,27 +296,32 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // =========================================================
-  // 11) BOTÃO DO ÁLBUM
-  // =========================================================
-  function configurarAlbum() {
-    if (!el.btnAlbum) return;
+// 11) BOTÃO DO ÁLBUM (prévia clicável)
+// =========================================================
+function configurarAlbum() {
+  if (!el.btnAlbum) return;
 
-    const linkAlbum = (convite.albumLink || "").trim();
+  const linkAlbum = (convite.albumLink || "./album.html").trim();
 
-    if (linkAlbum) {
-      el.btnAlbum.textContent = "Abrir álbum";
-      el.btnAlbum.disabled = false;
-      el.btnAlbum.removeAttribute("aria-disabled");
+  // Sempre mostra "Em breve"
+  el.btnAlbum.textContent = "Em breve";
 
-      el.btnAlbum.addEventListener("click", () => {
-        openExternal(linkAlbum);
-      });
-    } else {
-      el.btnAlbum.textContent = "Em breve";
-      el.btnAlbum.disabled = true;
-      el.btnAlbum.setAttribute("aria-disabled", "true");
-    }
+  // Se tiver link, deixa clicável como "prévia"
+  if (linkAlbum) {
+    el.btnAlbum.disabled = false;
+    el.btnAlbum.removeAttribute("aria-disabled");
+    el.btnAlbum.setAttribute("title", "Ver prévia do álbum");
+
+    el.btnAlbum.addEventListener("click", () => {
+      openExternal(linkAlbum);
+    }, { once: true }); // evita duplicar listener
+  } else {
+    // Sem link, mantém desativado
+    el.btnAlbum.disabled = true;
+    el.btnAlbum.setAttribute("aria-disabled", "true");
+    el.btnAlbum.removeAttribute("title");
   }
+}
 
   // =========================================================
   // 12) CONTAGEM REGRESSIVA
